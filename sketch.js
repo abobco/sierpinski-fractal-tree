@@ -6,10 +6,7 @@ let weight = 0.001;
 let targetAngle = Math.PI *2/3;
 let prevAngle = Math.PI / 12;
 
-const TREE_ANGLE = Math.PI / 12;
-const SIER_ANGLE = Math.PI *2/3
-
-// NOTE: setup() and draw() are automatically called by the p5.js editor
+// NOTE: setup() and draw() are automatically called by p5.js
 //        - setup() is called once when the page loads
 //        - draw() is called at the beginning of every animation frame, meaning it is called over and over until the page is closed
 
@@ -24,19 +21,22 @@ function draw() {
   
   //  Using asymptotic averaging with linearly increasing weight to control the animation speed
   //  This just means the animation starts off slow, speeds up in the middle, then slows down again at the end
-  if ( Math.abs((targetAngle - branchAngle) * weight) < 0.0001){
-    weight = 0.001;
+  if (weight < 0.05)  
+    weight += 0.001
+  let angleIncrement = (targetAngle - branchAngle) * weight;
+  branchAngle += angleIncrement;
+  
+  // draw all the lines for our tree
+  drawTree(drawInstructions, branchAngle);
+  
+  // swap animation direction once it starts to slow down
+  if ( Math.abs(angleIncrement) < 0.0001){
+    weight = 0.001; // also reset weight to original value, so it's slower at the start
     let temp = targetAngle;
     targetAngle = prevAngle;
     prevAngle = temp;
   }
-  if (weight < 0.05)  
-    weight += 0.001
-  branchAngle += (targetAngle - branchAngle) * weight;
 
-  
-  // draw all the lines for our tree
-  drawTree(drawInstructions, branchAngle);
 }
 
 // used to draw branches coming from a shared position
