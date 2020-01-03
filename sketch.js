@@ -85,7 +85,8 @@ function drawTree(instructions, branchAngle){
 
 // convenience for drawing lines from a starting position, angle, and magnitude
 function drawRay(position, angle, magnitude = 5){
-  let endPosition = createVector(position.x + magnitude*cos(angle),                                           position.y + magnitude*sin(angle));
+  let endPosition = createVector(position.x + magnitude*cos(angle), 
+                                 position.y + magnitude*sin(angle));
   line(position.x, 
        position.y, 
        endPosition.x,
