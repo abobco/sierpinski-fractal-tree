@@ -1,7 +1,6 @@
 // globals used between draw calls
 let drawInstructions = makeInstructions('0',7);
 let branchAngle = Math.PI / 12;
-let rotationDirection = 1;
 let weight = 0.001;
 let targetAngle = Math.PI *2/3;
 let prevAngle = Math.PI / 12;
